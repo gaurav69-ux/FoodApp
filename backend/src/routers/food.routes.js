@@ -16,6 +16,11 @@ router.post('/',
     upload.single('mama'),
     foodController.createFood);
 
+// GET  /api/food/ [protected]
+router.get('/,',
+    ""
+); 
+
 
 
 module.exports = router;

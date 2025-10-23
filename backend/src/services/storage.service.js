@@ -1,10 +1,11 @@
-const Imagekit = require("imagekit");
-const multer = require('multer');
+// SDK initialization
 
-const imagekit = new Imagekit({
-    publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
-    privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
-    urlEndpoint: process.env.IMAGEKIT_KEY_ENDPIONT
+var ImageKit = require("imagekit");
+
+var imagekit = new ImageKit({
+    publicKey : process.env.IMAGEKIT_PUBLIC_KEY,
+    privateKey : process.env.IMAGEKIT_PRIVATE_KEY,
+    urlEndpoint : process.env.IMAGEKIT_KEY_ENDPOINT
 });
 
 async function uploadFile(file, fileName) {
@@ -12,13 +13,12 @@ async function uploadFile(file, fileName) {
         file: file, 
         fileName: fileName,
     });
-    
+    // console.log("result: ",result);  // always use "console.log" berfore the "return".  
+   
     return result;  //return the url of the uploded file
-    console.log(result);
+    
 }
-
-
 
 module.exports = {
     uploadFile
-}
+};

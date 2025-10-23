@@ -28,8 +28,37 @@ async function authFoodPartnerMiddleware(req, res, next) {
 
     }
 }
+
+async function authUserMiddleware(req, res, next){
+
+    const token = req.cookies.token;
+
+    if (!token) {
+        return res.status(401).json({
+            message: 'Unauthorized. please login fisrt'
+        });
+    }
+
+    try { 
+       const decoded = jwt.verify(token, process.env.JWT_SECRET ) 
+
+       const user = await userModel.findById(decoded.id);
+
+        req.user = user; 
+
+        next(); 
+
+    } catch (error) {
+        return res.status(401).json({
+            message: "invalid token"
+        })
+
+    }
+
+}
  
 
 module.exports = {
-    authFoodPartnerMiddleware
+    authFoodPartnerMiddleware,
+    authUserMiddleware
 }
