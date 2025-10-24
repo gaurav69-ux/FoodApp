@@ -17,7 +17,7 @@ async function createFood(req, res) {
       // }
 
       const fileUploadResult = await storageService.uploadFile(req.file.buffer, uuid());
-      // console.log(fileUploadResult);
+      console.log(fileUploadResult);
 
 
       const foodItem = await foodModel.create({
@@ -34,6 +34,16 @@ async function createFood(req, res) {
  };
 
 
+async function getFoodItems(req, res) {
+  const foodItems = await foodModel.find({})
+  res.status(200).json({
+     message: "Food items fetched successfully",
+     food : foodItems
+  });
+} 
+
+
     module.exports = {
-        createFood
+        createFood,
+        getFoodItems
     };
