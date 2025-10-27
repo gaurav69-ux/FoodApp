@@ -1,0 +1,152 @@
+.video-feed-container {
+  /* When used inside the mobile-device wrapper this becomes full-size of the phone frame */
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  position: relative;
+  background-color: black;
+}
+
+.video-feed-container::-webkit-scrollbar {
+  display: none;
+}
+
+.video-feed-item {
+  height: 100%;
+  width: 100%;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-feed-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-content-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  color: white;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.video-content-description {
+  font-size: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  margin: 0;
+}
+
+.store-visit-button {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.store-visit-button:hover {
+  background-color: #ff3333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.store-visit-button:active {
+  transform: translateY(0);
+}
+
+/* Mobile-like device frame for desktop preview */
+.mobile-frame {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding: 24px 12px;
+  box-sizing: border-box;
+  background: #393838; /* dark background around the phone */
+}
+
+.mobile-device {
+  width: 390px; /* typical mobile width */
+  height: 844px; /* typical mobile height (iPhone 13-ish) */
+  max-width: 100%;
+  max-height: calc(100vh - 48px);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  background: black;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Make scroll inside the phone smooth */
+.mobile-device .video-feed-container {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Loading, Error, and No Videos states */
+.loading,
+.error,
+.no-videos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2rem;
+}
+
+.error {
+  color: #ff4d4d;
+}
+
+.loading {
+  position: relative;
+}
+
+.loading:after {
+  content: '';
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ffffff3d;
+  border-top: 4px solid white;
+  border-radius: 50%;
+  position: absolute;
+  top: calc(50% - 60px);
+  left: calc(50% - 20px);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
