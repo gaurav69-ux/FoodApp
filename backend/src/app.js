@@ -3,12 +3,16 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./routers/auth.routes');
 const foodRoutes = require('./routers/food.routes');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 app.use(express.json());  //middleware to read the data from req.body
 app.use(cookieParser());
-
+app.use(cors({
+    origin: 'http://localhost:5173', // frontend ka address
+    credentials: true
+})); // Enable CORS for all routes (you can customize the options as needed
 
 app.get('/', (req, res) => {
     res.send('Hello World!'); 

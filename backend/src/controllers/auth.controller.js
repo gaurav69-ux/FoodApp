@@ -91,7 +91,7 @@ function logoutUser(req, res) {
 }
 
 async function registerFoodPartner(req, res) {
-    const { name, email, password } = req.body;   //by default req.body is not read the data thats why we provede middleware in app.js
+    const { restaurantName, ownerName, address, mobileNumber, email, password } = req.body;   //by default req.body is not read the data thats why we provede middleware in app.js
 
     const isAccountAlreadyExists = await foodPartnerModel.findOne({
         email
@@ -105,7 +105,10 @@ async function registerFoodPartner(req, res) {
     const hashedPassword = await bcrypt.hash(password, 10); //10 is salt value
 
     const foodPartner = await foodPartnerModel.create({
-        name,
+        restaurantName,
+        ownerName,
+        address,
+        mobileNumber,
         email,
         password: hashedPassword
     });
@@ -121,7 +124,10 @@ async function registerFoodPartner(req, res) {
         foodPartner: {
             id: foodPartner._id,
             email: foodPartner.email,
-            name: foodPartner.name
+            ownerName: foodPartner.ownerName,
+            address: foodPartner.address,
+            mobileNumber: foodPartner.mobileNumber,
+            restaurantName: foodPartner.restaurantName
         }
     });
 }
